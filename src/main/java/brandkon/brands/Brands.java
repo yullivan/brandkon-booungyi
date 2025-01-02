@@ -1,18 +1,31 @@
 package brandkon.brands;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import brandkon.categories.Categories;
+import jakarta.persistence.*;
 
 @Entity
 public class Brands {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String name;
-    String imageUrl;
+    private String name;
+    private String imageUrl; // image)
+    @ManyToOne
+    private Categories category;
+
+    private String guidelines;
+
+    public Brands() {
+    }
+
+    public Brands(Long id, String name, String image_Url, Categories category, String guidelines) {
+        this.id = id;
+        this.name = name;
+        this.imageUrl = image_Url;
+        this.category = category;
+        this.guidelines = guidelines;
+    }
 
     public Brands(Long id, String name, String imageUrl) {
         this.id = id;
@@ -32,15 +45,11 @@ public class Brands {
         return imageUrl;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Categories getCategory() {
+        return category;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public String getGuidelines() {
+        return guidelines;
     }
 }

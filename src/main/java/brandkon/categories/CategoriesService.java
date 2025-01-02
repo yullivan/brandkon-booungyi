@@ -1,6 +1,5 @@
 package brandkon.categories;
 
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +13,11 @@ public class CategoriesService {
     }
 
 
-    public List<Categories> getcategories() {
+    public List<CategoriesResponse> getcategories() {
         return categoriesRepository.findAll()
                 .stream()
                 .map(categories ->
-                        new Categories(
+                        new CategoriesResponse(
                                 categories.getId(),
                                 categories.getName(),
                                 categories.getSlug(),

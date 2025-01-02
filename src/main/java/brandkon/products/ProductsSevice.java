@@ -2,7 +2,7 @@ package brandkon.products;
 
 import brandkon.brands.Brands;
 import brandkon.brands.BrandsRepository;
-import jakarta.validation.Valid;
+import brandkon.brands.BrandsResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,18 +17,47 @@ public class ProductsSevice {
         this.brandsRepository = brandsRepository;
     }
 
-    public List<ProductsResoponse> getproducts() {
+    public List<ProductsResponse> getproducts() {
         return productsRepository.findAll().stream()
-                .map(products -> new ProductsResoponse(
-                        products.getId(), products.getBrands().getName(),
-                        products.getProductName(), products.getPrice(),
+                .map(products -> new ProductsResponse(
+                        products.getId(),
+                        products.getBrand().getName(),
+                        products.getName(),
+                        products.getPrice(),
                         products.getImageUrl()
                 )).toList();
-
     }
 
-//    public List<Products> getproductsBrandId(@Valid Long brandsId) {
-//        Brands brands = brandsRepository.findAllById(brandsId)
-//        return null;
-//    }
+    public List<ProductsResponse> getproductsBrandId(Long brandId) {
+        if (brandId == null) {
+            return productsRepository.findAll().stream()
+                    .map(products -> new ProductsResponse(
+                            products.getId(),
+                            products.getBrand().getName(),
+                            products.getName(),
+                            products.getPrice(),
+                            products.getImageUrl()
+                    )).toList();
+        }
+        Brands brands = brandsRepository.findById(brandId).orElseThrow();
+        return productsRepository.findById(brands.getId()).stream()
+                .map(products -> new ProductsResponse(
+                        products.getId(),
+                        products.getBrand().getName(),
+                        products.getName(),
+                        products.getPrice(),
+                        products.getImageUrl())).toList();
+    }
+
+    public ProductsResponse2 getproductid(Long productId) {
+        Brands brand = brandsRepository.findById(productId).orElseThrow();
+        BrandsResponse brands = new BrandsResponse(brand.getId(), brand.getName(), brand.getImageUrl());
+        Product product = productsRepository.findById(productId).orElseThrow();
+        return new ProductsResponse2(
+                product.getId(),
+                product.getName(),
+                product.getPrice(),
+                brands,
+                product.getExpirationDays());
+    }
 }

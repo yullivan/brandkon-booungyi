@@ -12,11 +12,11 @@ public class BrandsService {
         this.brandsRepository = brandsRepository;
     }
 
-    public List<Brands> getbrands() {
+    public List<BrandsResponse> getbrands() {
         return brandsRepository.findAll()
                 .stream()
                 .map(brands ->
-                        new Brands(brands.getId(),
+                        new BrandsResponse(brands.getId(),
                                 brands.getName(),
                                 brands.getImageUrl()
                         )).toList();

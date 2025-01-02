@@ -9,20 +9,20 @@ import jakarta.persistence.Id;
 public class Categories {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String name;
-    String slug;
-    String imageUrl;
+    private String name;
+    private String slug;
+    private String imageUrl;
 
     public Categories() {
     }
 
-    public Categories(Long id, String name, String slug, String imageUrl) {
+    public Categories(Long id, String name, String slug, String image_Url) {
         this.id = id;
         this.name = name;
         this.slug = slug;
-        this.imageUrl = imageUrl;
+        this.imageUrl = image_Url;
     }
 
     public Long getId() {
@@ -39,21 +39,5 @@ public class Categories {
 
     public String getImageUrl() {
         return imageUrl;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 }

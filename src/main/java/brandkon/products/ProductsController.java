@@ -1,9 +1,8 @@
 package brandkon.products;
 
-import brandkon.brands.Brands;
-import brandkon.brands.BrandsService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,18 +14,22 @@ public class ProductsController {
     ProductsSevice productsSevice;
 
     public ProductsController(ProductsSevice productsSevice) {
-
         this.productsSevice = productsSevice;
     }
 
+//    @GetMapping("/products")
+//    public List<ProductsResoponse> productsList() {
+//        return productsSevice.getproducts();
+//    }
+
     @GetMapping("/products")
-    public List<ProductsResoponse> productsList() {
-        return productsSevice.getproducts();
+    public List<ProductsResponse> getproductsid(@Valid @RequestParam(required = false) Long brandId) {
+        return productsSevice.getproductsBrandId(brandId);
+
     }
 
-//    @GetMapping("/products")
-//    public List<Products> getproductsid(@Valid @RequestParam Long brandsId) {
-//        return productsSevice.getproductsBrandId(brandsId);
-//
-//    }
+    @GetMapping("/products/{productId}")
+    public ProductsResponse2 getproductId(@PathVariable Long productId) {
+        return productsSevice.getproductid(productId);
+    }
 }

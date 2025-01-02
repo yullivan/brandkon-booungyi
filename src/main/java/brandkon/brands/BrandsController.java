@@ -14,7 +14,7 @@ public class BrandsController {
     }
 
     @GetMapping("/brands")
-    public List<Brands> brandsList() {
+    public List<BrandsResponse> brandsList() {
         return brandsService.getbrands();
     }
 }

@@ -1,6 +1,6 @@
 package brandkon.products;
 
-public record ProductsResoponse(
+public record ProductsResponse(
         Long id,
         String brandName,
         String productName,

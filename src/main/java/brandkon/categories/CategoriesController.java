@@ -18,7 +18,7 @@ public class CategoriesController {
 
     //Todo 카테고리목록 조회
     @GetMapping("/categories")
-    public List<Categories> categoriesList() {
+    public List<CategoriesResponse> categoriesList() {
         return categoriesService.getcategories();
     }
 }
