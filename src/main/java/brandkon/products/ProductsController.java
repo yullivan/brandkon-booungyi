@@ -32,4 +32,12 @@ public class ProductsController {
     public ProductsResponse2 getproductId(@PathVariable Long productId) {
         return productsSevice.getproductid(productId);
     }
+
+    @GetMapping("/products/popular")
+    public List<ProductsResponse3> getpopularproducts(
+            @RequestParam(value = "categoryId", required = false) Long categotyId,
+            @RequestParam(value = "brandId", required = false) Long brandId
+    ) {
+        return productsSevice.getpopularproduct(categotyId,brandId);
+    }
 }
